@@ -194,4 +194,18 @@ public final class OfflineGameService {
         }
         return true;
     }
+    public static void restartGame(OfflineGame game) {
+    if (game == null) return;
+
+    for (int i = 0; i < game.getBoardSize(); i++) {
+        for (int j = 0; j < game.getBoardSize(); j++) {
+            game.setCell(i, j, (byte) 0);
+        }
+    }
+    game.getMoves().clear();
+    game.setCurrentPlayer(1);
+    game.setState(GameState.IN_PROGRESS);
+    game.setResult(GameResult.NONE);
+    game.setUpdatedAt(System.currentTimeMillis());
+}
 }
