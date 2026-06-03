@@ -32,7 +32,7 @@
                       <% if (request.getAttribute("error") != null) { %>
                       <div class="card" style="padding:12px; margin-bottom:12px; color:#b42318;"><%= request.getAttribute("error") %></div>
                       <% } %>
-
+                      <%-- Tối ưu UI Form Tạo Phòng và Phân loại Kích thước (create-room.jsp) Phạm Quốc Đăng --%>
                       <form class="card" style="padding:24px; display:grid; gap:16px;" method="post" action="<%= request.getContextPath() %>/create-room">
 
                           <div style="display: flex; flex-direction: column; gap: 6px;">
