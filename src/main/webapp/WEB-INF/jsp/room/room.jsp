@@ -84,6 +84,7 @@
 
           <div style="display:grid; gap:14px;">
             <div class="card" style="padding:20px; display:grid; gap:8px;">
+                <%-- Làm nổi bật và thêm nút "Copy" Mã Phòng (room.jsp) Phạm Quốc Đăng --%>
                 <div style="background: #fffbeb; border: 1px dashed #f59e0b; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                     <div>
                         <div style="font-size: 13px; color: #92400e; margin-bottom: 4px;">Mã phòng của bạn:</div>
