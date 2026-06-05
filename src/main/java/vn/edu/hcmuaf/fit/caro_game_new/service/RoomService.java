@@ -1,8 +1,8 @@
-package vn.edu.hcmuaf.fit.demo3.service;
+package vn.edu.hcmuaf.fit.caro_game_new.service;
 
-import vn.edu.hcmuaf.fit.demo3.dao.RoomDao;
-import vn.edu.hcmuaf.fit.demo3.model.AuthUser;
-import vn.edu.hcmuaf.fit.demo3.model.Room;
+import vn.edu.hcmuaf.fit.caro_game_new.Dao.RoomDao;
+import vn.edu.hcmuaf.fit.caro_game_new.model.AuthUser;
+import vn.edu.hcmuaf.fit.caro_game_new.model.Room;
 
 import java.security.SecureRandom;
 import java.sql.SQLException;
