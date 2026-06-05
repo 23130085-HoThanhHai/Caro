@@ -3,50 +3,44 @@ package vn.edu.hcmuaf.fit.caro_game_new.model;
 import java.time.LocalDateTime;
 
 public class ChatMessage {
-    private Long id;
-    private Long roomId;
-    private Long senderUserId;
+    private long id;
+    private long roomId;
+    private long senderUserId;
+    private String senderUsername;
     private String messageType;
     private String messageText;
     private LocalDateTime createdAt;
 
-    public ChatMessage() {
-    }
-
-    public ChatMessage(Long id, Long roomId, Long senderUserId,
-                       String messageType, String messageText,
-                       LocalDateTime createdAt) {
-        this.id = id;
-        this.roomId = roomId;
-        this.senderUserId = senderUserId;
-        this.messageType = messageType;
-        this.messageText = messageText;
-        this.createdAt = createdAt;
-    }
-
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getRoomId() {
+    public long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(Long roomId) {
+    public void setRoomId(long roomId) {
         this.roomId = roomId;
     }
 
-    public Long getSenderUserId() {
+    public long getSenderUserId() {
         return senderUserId;
     }
 
-    public void setSenderUserId(Long senderUserId) {
+    public void setSenderUserId(long senderUserId) {
         this.senderUserId = senderUserId;
+    }
+
+    public String getSenderUsername() {
+        return senderUsername;
+    }
+
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
     }
 
     public String getMessageType() {
