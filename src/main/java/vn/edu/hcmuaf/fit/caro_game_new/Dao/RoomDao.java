@@ -101,7 +101,6 @@ public final class RoomDao {
             }
         }
     }
-
     public List<RoomPlayer> findPlayers(long roomId) throws SQLException {
         String sql = """
                 SELECT rp.id, rp.room_id, rp.user_id, rp.role, rp.created_at,
@@ -206,5 +205,38 @@ public final class RoomDao {
             } finally {
                 c.setAutoCommit(true);
             }
+        }
+        // -	4.12: Server tải dữ liệu phòng và forward sang UI phòng
+        public List<RoomPlayer> findPlayers(long roomId) throws SQLException {
+            String sql = """
+                SELECT rp.id, rp.room_id, rp.user_id, rp.role, rp.created_at,
+                       u.username, p.display_name
+                FROM room_players rp
+                JOIN users u ON u.id = rp.user_id
+                LEFT JOIN user_profiles p ON p.user_id = u.id
+                WHERE rp.room_id = ?
+                ORDER BY CASE WHEN rp.role = 'HOST' THEN 0 ELSE 1 END, rp.created_at
+                """;
+            List<RoomPlayer> players = new ArrayList<>();
+            try (Connection c = DbUtil.getConnection();
+                 PreparedStatement ps = c.prepareStatement(sql)) {
+                ps.setLong(1, roomId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        players.add(new RoomPlayer(
+                                rs.getLong("id"),
+                                rs.getLong("room_id"),
+                                rs.getLong("user_id"),
+                                rs.getString("username"),
+                                rs.getString("display_name"),
+                                rs.getString("role"),
+                                null,
+                                null,
+                                rs.getTimestamp("created_at").toLocalDateTime()
+                        ));
+                    }
+                }
+            }
+            return players;
         }
     }
