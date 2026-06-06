@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.caro_game_new.service;
 import vn.edu.hcmuaf.fit.caro_game_new.Dao.ChatDao;
 import vn.edu.hcmuaf.fit.caro_game_new.model.AuthUser;
 import vn.edu.hcmuaf.fit.caro_game_new.model.ChatMessage;
+import vn.edu.hcmuaf.fit.caro_game_new.model.MessageType;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -18,11 +19,11 @@ public class ChatService {
             String text)
             throws SQLException {
 
-        if(sender == null){
+        if (sender == null) {
             throw new IllegalArgumentException("Chưa đăng nhập");
         }
 
-        if(text == null || text.isBlank()){
+        if (text == null || text.isBlank()) {
             throw new IllegalArgumentException("Tin nhắn rỗng");
         }
 
@@ -31,7 +32,26 @@ public class ChatService {
         msg.setRoomId(roomId);
         msg.setSenderUserId(sender.getId());
         msg.setMessageText(text.trim());
-        msg.setMessageType("TEXT");
+
+        // CHAT hoặc SYSTEM
+        msg.setMessageType(MessageType.CHAT);
+
+        msg.setCreatedAt(LocalDateTime.now());
+
+        chatDao.saveMessage(msg);
+    }
+
+    public void sendSystemMessage(
+            long roomId,
+            String text)
+            throws SQLException {
+
+        ChatMessage msg = new ChatMessage();
+
+        msg.setRoomId(roomId);
+        msg.setSenderUserId(null);
+        msg.setMessageText(text);
+        msg.setMessageType(MessageType.SYSTEM);
         msg.setCreatedAt(LocalDateTime.now());
 
         chatDao.saveMessage(msg);
