@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.caro_game_new.service;
 
-import vn.edu.hcmuaf.fit.caro_game_new.Dao.ChatMessageDao;
+import vn.edu.hcmuaf.fit.caro_game_new.Dao.ChatDao;
 import vn.edu.hcmuaf.fit.caro_game_new.model.AuthUser;
 import vn.edu.hcmuaf.fit.caro_game_new.model.ChatMessage;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ChatService {
 
-    private final ChatMessageDao chatDao = new ChatMessageDao();
+    private final ChatDao chatDao = new ChatDao();
 
     public void sendMessage(
             AuthUser sender,
