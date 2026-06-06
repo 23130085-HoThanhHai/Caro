@@ -3,12 +3,19 @@ package vn.edu.hcmuaf.fit.caro_game_new.model;
 import java.time.LocalDateTime;
 
 public class ChatMessage {
+
     private long id;
+
     private long roomId;
-    private long senderUserId;
+
+    private Long senderUserId;
+
     private String senderUsername;
-    private String messageType;
+
+    private MessageType messageType;
+
     private String messageText;
+
     private LocalDateTime createdAt;
 
     public long getId() {
@@ -27,11 +34,11 @@ public class ChatMessage {
         this.roomId = roomId;
     }
 
-    public long getSenderUserId() {
+    public Long getSenderUserId() {
         return senderUserId;
     }
 
-    public void setSenderUserId(long senderUserId) {
+    public void setSenderUserId(Long senderUserId) {
         this.senderUserId = senderUserId;
     }
 
@@ -43,11 +50,11 @@ public class ChatMessage {
         this.senderUsername = senderUsername;
     }
 
-    public String getMessageType() {
+    public MessageType getMessageType() {
         return messageType;
     }
 
-    public void setMessageType(String messageType) {
+    public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
     }
 

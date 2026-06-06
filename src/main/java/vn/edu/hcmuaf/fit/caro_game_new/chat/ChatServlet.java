@@ -12,7 +12,8 @@ import java.io.IOException;
 @WebServlet("/chat/send")
 public class ChatServlet extends HttpServlet {
 
-    private final ChatService chatService = new ChatService();
+    private final ChatService chatService =
+            new ChatService();
 
     @Override
     protected void doPost(
@@ -22,14 +23,29 @@ public class ChatServlet extends HttpServlet {
 
         try {
 
-            AuthUser user =
-                    (AuthUser) request.getSession()
-                            .getAttribute(
-                                    AuthSession.AUTH_USER);
+            HttpSession session =
+                    request.getSession(false);
 
-            long roomId =
-                    Long.parseLong(
-                            request.getParameter("roomId"));
+            if (session == null) {
+                response.sendError(
+                        HttpServletResponse.SC_UNAUTHORIZED,
+                        "Bạn chưa đăng nhập");
+                return;
+            }
+
+            AuthUser user =
+                    (AuthUser) session.getAttribute(
+                            AuthSession.AUTH_USER);
+
+            if (user == null) {
+                response.sendError(
+                        HttpServletResponse.SC_UNAUTHORIZED,
+                        "Bạn chưa đăng nhập");
+                return;
+            }
+
+            long roomId = Long.parseLong(
+                    request.getParameter("roomId"));
 
             String text =
                     request.getParameter("message");
@@ -39,8 +55,15 @@ public class ChatServlet extends HttpServlet {
                     roomId,
                     text);
 
-            response.sendRedirect(
-                    request.getHeader("Referer"));
+            String referer =
+                    request.getHeader("Referer");
+
+            if (referer != null) {
+                response.sendRedirect(referer);
+            } else {
+                response.sendRedirect(
+                        request.getContextPath());
+            }
 
         } catch (Exception e) {
 
