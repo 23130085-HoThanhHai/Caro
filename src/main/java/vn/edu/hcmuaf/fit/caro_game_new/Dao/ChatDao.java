@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatMessageDao {
+public class ChatDao {
 
     public void saveMessage(ChatMessage message) throws SQLException {
 
