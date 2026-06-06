@@ -132,6 +132,51 @@
               </div>
               <p style="margin-top:8px; color:#667085; font-size:13px;">Người chơi khác nhập mã phòng để vào ngay.</p>
             </div>
+
+
+              <div class="card" style="padding:20px;">
+                  <h3 style="margin-top:0;">Chat phòng</h3>
+
+                  <div id="chatMessages"
+                       style="height:250px;
+                overflow-y:auto;
+                border:1px solid #eee;
+                padding:10px;
+                border-radius:8px;
+                margin-bottom:10px;">
+
+                      <c:forEach items="${messages}" var="msg">
+                          <div style="margin-bottom:8px;">
+                              <strong>${msg.senderUsername}</strong>:
+                                  ${msg.content}
+                          </div>
+                      </c:forEach>
+
+                  </div>
+
+                  <form id="chatForm">
+                      <input type="hidden"
+                             id="roomId"
+                             value="<%= room.getId() %>">
+
+                      <input type="text"
+                             id="messageText"
+                             placeholder="Nhập tin nhắn..."
+                             maxlength="500"
+                             style="width:100%;
+                      padding:10px;
+                      border:1px solid #ddd;
+                      border-radius:8px;" />
+
+                      <button class="btn btn-primary"
+                              type="submit"
+                              style="margin-top:10px;width:100%;">
+                          Gửi
+                      </button>
+                  </form>
+              </div>
+
+
             <a class="btn btn-ghost" href="<%= request.getContextPath() %>/index.jsp" style="text-align:center;">Về sảnh</a>
           </div>
         </div>
@@ -268,6 +313,79 @@
     latestState = data.state;
     renderState();
   }
+
+
+  document.getElementById("chatForm")
+      .addEventListener("submit", async function(e){
+
+          e.preventDefault();
+
+          const text =
+              document.getElementById("messageText").value.trim();
+
+          if(!text) return;
+
+          const roomId =
+              document.getElementById("roomId").value;
+
+          const body =
+              "roomId=" + roomId +
+              "&message=" + encodeURIComponent(text);
+
+          const response = await fetch(
+              contextPath + "/chat/send",
+              {
+                  method:"POST",
+                  headers:{
+                      "Content-Type":
+                          "application/x-www-form-urlencoded"
+                  },
+                  body:body
+              }
+          );
+
+          const result = await response.json();
+
+          if(result.success){
+              document.getElementById("messageText").value="";
+              loadMessages();
+          }else{
+              alert(result.error);
+          }
+      });
+
+  async function loadMessages(){
+
+      const roomId =
+          document.getElementById("roomId").value;
+
+      const response = await fetch(
+          contextPath + "/chat/messages?roomId=" + roomId
+      );
+
+      const data = await response.json();
+
+      let html = "";
+
+      data.messages.forEach(msg => {
+
+          html += `
+            <div style="margin-bottom:8px;">
+                <strong>${msg.senderUsername}</strong>:
+                ${msg.content}
+            </div>
+        `;
+      });
+
+      const box =
+          document.getElementById("chatMessages");
+
+      box.innerHTML = html;
+      box.scrollTop = box.scrollHeight;
+  }
+
+  setInterval(loadMessages, 2000);
+
 </script>
 </body>
 </html>
