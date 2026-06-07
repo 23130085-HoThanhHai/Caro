@@ -1,7 +1,7 @@
 
-import vn.edu.hcmuaf.fit.demo3.db.DbUtil;
-import vn.edu.hcmuaf.fit.demo3.model.Room;
-import vn.edu.hcmuaf.fit.demo3.model.RoomPlayer;
+import vn.edu.hcmuaf.fit.caro_game_new.db.DbUtil;
+import vn.edu.hcmuaf.fit.caro_game_new.model.Room;
+import vn.edu.hcmuaf.fit.caro_game_new.model.RoomPlayer;
 import vn.edu.hcmuaf.fit.demo3.model.RoomStatus;
 
 import java.sql.*;
