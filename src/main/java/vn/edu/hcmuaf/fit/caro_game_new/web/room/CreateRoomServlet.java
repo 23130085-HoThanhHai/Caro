@@ -1,15 +1,15 @@
-package vn.edu.hcmuaf.fit.demo3.web.room;
+package vn.edu.hcmuaf.fit.caro_game_new.web.room;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import vn.edu.hcmuaf.fit.demo3.model.AuthUser;
-import vn.edu.hcmuaf.fit.demo3.model.Room;
-import vn.edu.hcmuaf.fit.demo3.service.RoomException;
-import vn.edu.hcmuaf.fit.demo3.service.RoomService;
-import vn.edu.hcmuaf.fit.demo3.web.auth.AuthSession;
+import vn.edu.hcmuaf.fit.caro_game_new.model.AuthUser;
+import vn.edu.hcmuaf.fit.caro_game_new.model.Room;
+import vn.edu.hcmuaf.fit.caro_game_new.service.RoomException;
+import vn.edu.hcmuaf.fit.caro_game_new.service.RoomService;
+import vn.edu.hcmuaf.fit.caro_game_new.authen.AuthSession;
 
 import java.io.IOException;
 import java.sql.SQLException;

@@ -3,41 +3,34 @@ package vn.edu.hcmuaf.fit.caro_game_new.model;
 import java.time.LocalDateTime;
 
 public class ChatMessage {
-    private Long id;
-    private Long roomId;
+
+    private long id;
+
+    private long roomId;
+
     private Long senderUserId;
-    private String messageType;
+
+    private String senderUsername;
+
+    private MessageType messageType;
+
     private String messageText;
+
     private LocalDateTime createdAt;
 
-    public ChatMessage() {
-    }
-
-    public ChatMessage(Long id, Long roomId, Long senderUserId,
-                       String messageType, String messageText,
-                       LocalDateTime createdAt) {
-        this.id = id;
-        this.roomId = roomId;
-        this.senderUserId = senderUserId;
-        this.messageType = messageType;
-        this.messageText = messageText;
-        this.createdAt = createdAt;
-    }
-
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getRoomId() {
+    public long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(Long roomId) {
+    public void setRoomId(long roomId) {
         this.roomId = roomId;
     }
 
@@ -49,11 +42,19 @@ public class ChatMessage {
         this.senderUserId = senderUserId;
     }
 
-    public String getMessageType() {
+    public String getSenderUsername() {
+        return senderUsername;
+    }
+
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
+    }
+
+    public MessageType getMessageType() {
         return messageType;
     }
 
-    public void setMessageType(String messageType) {
+    public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
     }
 
